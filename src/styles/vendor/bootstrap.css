@@ -1,0 +1,6 @@
+.btn-default {
+  border: 1px solid #bbbbbb;
+}
+.btn:disabled {
+  cursor: not-allowed;
+}

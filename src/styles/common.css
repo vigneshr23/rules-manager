@@ -12,9 +12,23 @@
   flex-direction: column;
   overflow: auto;
 }
+.modal--medium {
+  width: 50%;
+  height: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%);
+}
 .modal__header {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   width: 100%;
+}
+
+@media (max-width: 750px) {
+  .modal--medium {
+    width: 85%;
+    height: 85%;
+  }
 }

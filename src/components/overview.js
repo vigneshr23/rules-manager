@@ -17,7 +17,7 @@ class Overview extends Component {
         <nav>
           <ul>
             <li>
-              <Link to="/rules">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/rules">View Rules</Link>
@@ -46,15 +46,7 @@ class Overview extends Component {
           />
           <Route path="/rules/edit/:id" component={EditRule} />
 
-          <Route
-            path="/404"
-            component={() => (
-              <div>
-                <h6>404: Path Not Found</h6>
-              </div>
-            )}
-          />
-          <Redirect from="*" to="/404" />
+          <Redirect from="*" to="/" />
         </Switch>
       </Router>
     );

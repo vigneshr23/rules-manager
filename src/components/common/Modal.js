@@ -44,11 +44,12 @@ class ModalContainer extends Component {
   }
 
   render() {
-    const { title, modalClass = " " } = this.props;
+    const { title, modalSize = "" } = this.props;
+    const modalClass = modalSize ? `modal--${modalSize}` : " ";
 
     const modal = this.state.showModal && (
       <Modal>
-        <div className="modal">
+        <div className={`modal ${modalClass}`}>
           <div className="modal__header">
             <div className="modal__header__actions">
               <Close size="1.5rem" onClick={this.handleHide} />

@@ -9,7 +9,6 @@ const RuleList = ({ rules, ...props }) => {
   const { history, match } = props;
 
   const handleAdd = (e) => {
-    console.log(`Add clicked`);
   };
   const handleEdit = (index) => {
     console.log("Edit:", { props, index });

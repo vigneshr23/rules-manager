@@ -1,5 +1,7 @@
 .precondition {
   font-size: 95%;
+  display: flex;
+  margin: 0.6rem 0;
 }
 
 .precondition__entity {
@@ -7,6 +9,7 @@
   font-weight: 700;
   padding: 0 5px;
   cursor: pointer;
+  font-style: italic;
 }
 .precondition__entity:hover {
   color: gray;
