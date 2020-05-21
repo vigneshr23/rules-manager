@@ -1,68 +1,68 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import ModalContainer from "../common/Modal";
-import { Add, Edit } from "../common/Buttons";
+import React, { useState } from "react";
+import { Add, Edit, Remove } from "../common/Buttons";
 import { Link } from "react-router-dom";
+import DisplayRules from "./DisplayRules";
 
 const RuleList = ({ rules, ...props }) => {
   const [name, setName] = useState("");
   const { history, match } = props;
 
-  const handleAdd = (e) => {
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this?")) {
+      props.delegate.deleteRule(id);
+    } else return;
   };
   const handleEdit = (index) => {
     console.log("Edit:", { props, index });
     history.push(`${match.path}/edit/${index}`);
   };
 
-  if (rules instanceof Array && rules.length > 0) {
-    return (
-      <div>
-        <h3>RuleList</h3>
-        <div className="rule">
-          {rules.map((rule, index) => (
-            <div className="rule__content" key={index}>
-              <div>
-                <code>{JSON.stringify(rule)}</code>
-              </div>
-              <Link to={`${match.path}/add`}>
-                <Add size="1.5rem" onClick={handleAdd} />
-              </Link>
-              <Edit size="1.5rem" onClick={() => handleEdit(index)} />
-            </div>
-          ))}
-        </div>
-        {/* <ModalContainer
-        title="Custom Portal"
-        display={() => (
-          <PortalContent handleChange={handleChange} name={name} />
-        )}
-      >
-        <button>Open Portal</button>
-      </ModalContainer> */}
-      </div>
-    );
-  }
-  return <div>Loading...</div>;
-};
-
-const PortalContent = ({ handleChange, name }) => {
   return (
-    <form>
-      <input
-        type="text"
-        placeholder="enter name"
-        onChange={handleChange}
-        value={name}
-      ></input>
-    </form>
+    <div className="ruleslist">
+      {rules.length > 0 ? (
+        <div>
+          <h3>RuleList</h3>
+          <div className="rule">
+            <DisplayRules
+              rules={rules}
+              actions={[
+                (index) => (
+                  <Remove
+                    size="1.5rem"
+                    title="Delete Rule"
+                    onClick={() => handleDelete(index)}
+                    key="act-1"
+                  />
+                ),
+                (index) => (
+                  <Edit
+                    size="1.5rem"
+                    title="Edit Rule"
+                    onClick={() => handleEdit(index)}
+                    key="act-2"
+                  />
+                ),
+              ]}
+            />
+          </div>
+        </div>
+      ) : (
+        <div>No Rules Available</div>
+      )}
+      <div className="rulelist__buttonContainer">
+        <Link to={`${match.path}/add`}>
+          <div className="btn btn-primary">Add Rule</div>
+        </Link>
+      </div>
+    </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    rules: state.Rules,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     rules: state.Rules,
+//   };
+// };
 
-export default connect(mapStateToProps)(RuleList);
+// export default connect(mapStateToProps)(RuleList);
+export default RuleList;

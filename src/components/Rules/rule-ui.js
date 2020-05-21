@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Field } from "../common/Field";
 import RuleCondition from "../RulesEntity/RuleCondition";
 
-function RuleDescriptor({ rule, delegate, ...props }) {
+function RuleDescriptor({ rule, delegate, mode = "add", ...props }) {
   const { ruleName } = rule;
 
   const { onNameChange, saveRule } = delegate;
@@ -19,7 +19,6 @@ function RuleDescriptor({ rule, delegate, ...props }) {
         return;
       } else if (entities.length < 1) {
         alert("Rule condition is required");
-        console.log(rule.condition, entities);
         return;
       }
       return true;
@@ -30,16 +29,33 @@ function RuleDescriptor({ rule, delegate, ...props }) {
     return true;
   };
 
-  const clickHandle = () => {
+  const handleSave = () => {
+    const { history } = props;
     if (validateRule()) {
-      saveRule();
+      if (mode === "add") {
+        saveRule();
+        props.hide();
+      } else {
+        saveRule(() => history.push("/rules"));
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    const { history } = props;
+    if (mode === "add") {
+      props.hide();
+    } else {
+      history && history.goBack();
     }
   };
 
   return (
     <div className="ruleDescriptor">
-      <h5 style={{ textAlign: "center" }}>Define Rule</h5>
-      <div>
+      <h5 style={{ textAlign: "center" }}>
+        {mode === "add" ? "Define Rule" : "Edit Rule"}
+      </h5>
+      <div className="ruleDescriptor--flex">
         <Field
           type="text"
           placeholder="Enter Rule Name"
@@ -49,9 +65,18 @@ function RuleDescriptor({ rule, delegate, ...props }) {
         />
         <RuleCondition {...rule} {...delegate} />
 
-        <button className="btn btn-primary" onClick={clickHandle}>
-          Save
-        </button>
+        <div className="ruleDescriptor__buttonContianer">
+          <button
+            style={{ marginRight: "1rem" }}
+            className="btn btn-primary"
+            onClick={handleSave}
+          >
+            {mode === "add" ? "Save" : "Update"}
+          </button>
+          <button className="btn btn-danger" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

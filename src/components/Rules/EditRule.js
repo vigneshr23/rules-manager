@@ -1,16 +1,33 @@
 import React from "react";
+import { connect } from "react-redux";
+import RuleManager from "../Hoc/RuleMangerHoc";
+import RuleDescriptor from "./rule-ui";
 
 function EditRule(props) {
+  console.log("EditRule for: ", props.rule);
+  const { id } = props.match.params;
+  const rule = props.rules[id];
   return (
-    <div>
-      <p>Edit {props.match.params.id}</p>
-      <button
-        className="btn btn-primary"
-        onClick={() => props.history.push("/rules")}
-      >
-        Click me
-      </button>
+    <div className="editrule">
+      <code>{JSON.stringify(rule)}</code>
+
+      <RuleManager mode="edit" {...props}>
+        {(data, delegate) => (
+          <RuleDescriptor
+            rule={data}
+            history={props.history}
+            delegate={delegate}
+            mode="edit"
+          />
+        )}
+      </RuleManager>
     </div>
   );
 }
-export default EditRule;
+
+function mapStateToProps(state) {
+  return {
+    rules: state.Rules,
+  };
+}
+export default connect(mapStateToProps)(EditRule);

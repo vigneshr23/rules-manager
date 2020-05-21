@@ -1,6 +1,25 @@
-
+.rule {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 0 auto;
+}
 .rule__content {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.entities span:not(:last-child)::after {
+  content: ", ";
+}
+
+.rulelist__buttonContainer {
+  margin-top: 1rem;
+}
+
+@media (max-width: 750px) {
+  .rule {
+    max-width: 100%;
+  }
 }

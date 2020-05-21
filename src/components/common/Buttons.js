@@ -1,9 +1,10 @@
 import React from "react";
 import {
-  IoIosAddCircleOutline,
-  IoIosRemoveCircleOutline,
-} from "react-icons/io";
-import { MdClose, MdEdit, MdAddCircleOutline, MdRemoveCircleOutline } from "react-icons/md";
+  MdClose,
+  MdEdit,
+  MdAddCircleOutline,
+  MdRemoveCircleOutline,
+} from "react-icons/md";
 
 // export const Add = ({ onClick, size = "inherit", ...props }) => {
 //   return (
@@ -37,23 +38,23 @@ const Button = ({ onClick, ...props }) => {
   );
 };
 
-export const Edit = ({ size, ...props }) => (
+export const Edit = ({ size, title = "", ...props }) => (
   <Button {...props}>
-    <MdEdit size={size} />
+    <MdEdit size={size} title={title} />
   </Button>
 );
-export const Remove = ({ size, ...props }) => (
+export const Remove = ({ size, title = "", ...props }) => (
   <Button {...props}>
-    <MdRemoveCircleOutline size={size} />
+    <MdRemoveCircleOutline size={size} title={title} />
   </Button>
 );
-export const Add = ({ size, ...props }) => (
+export const Add = ({ size, title = "", ...props }) => (
   <Button {...props}>
-    <MdAddCircleOutline size={size} />
+    <MdAddCircleOutline size={size} title={title} />
   </Button>
 );
-export const Close = ({ size, ...props }) => (
+export const Close = ({ size, title = "", ...props }) => (
   <Button {...props}>
-    <MdClose size={size} />
+    <MdClose size={size} title={title} />
   </Button>
 );

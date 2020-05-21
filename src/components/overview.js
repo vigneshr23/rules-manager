@@ -6,6 +6,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import RulesData from "./Hoc/RulesListHoc";
 import RuleList from "./Rules/RuleList";
 import AddRule from "./Rules/AddRule";
 import EditRule from "./Rules/EditRule";
@@ -17,7 +18,7 @@ class Overview extends Component {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/rules">Home</Link>
             </li>
             <li>
               <Link to="/rules">View Rules</Link>
@@ -37,7 +38,13 @@ class Overview extends Component {
           <Route
             path="/rules"
             exact
-            render={(props) => <RuleList {...props} />}
+            render={(props) => (
+              <RulesData>
+                {(rules, delegate) => (
+                  <RuleList rules={rules} delegate={delegate} {...props} />
+                )}
+              </RulesData>
+            )}
           />
           <Route
             path="/rules/add"
@@ -46,7 +53,7 @@ class Overview extends Component {
           />
           <Route path="/rules/edit/:id" component={EditRule} />
 
-          <Redirect from="*" to="/" />
+          <Redirect from="*" to="/rules" />
         </Switch>
       </Router>
     );

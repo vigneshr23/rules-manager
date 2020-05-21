@@ -1,4 +1,8 @@
 @import "styles/base.css";
 @import "styles/common.css";
+
 @import "styles/components/rule-list.css";
 @import "styles/components/rule-condition.css";
+@import "styles/components/edit-rule.css";
+
+@import "styles/vendor/bootstrap.css";

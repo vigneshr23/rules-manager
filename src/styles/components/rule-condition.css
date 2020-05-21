@@ -1,3 +1,8 @@
+.ruleDescriptor--flex {
+  display: flex;
+  flex-direction: column;
+}
+
 .precondition {
   font-size: 95%;
   display: flex;
@@ -13,4 +18,22 @@
 }
 .precondition__entity:hover {
   color: gray;
+}
+
+.field label {
+  margin-right: 1rem;
+}
+
+.ruleDescriptor__buttonContianer {
+  margin: 1rem 0;
+  display: flex;
+}
+.ruleDescriptor__buttonContianer .btn {
+  flex: 1;
+}
+
+.condition--label {
+  border-bottom: 1px dotted;
+  max-width: max-content;
+  border-color: blue;
 }

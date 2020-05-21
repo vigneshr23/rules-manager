@@ -22,8 +22,18 @@ const AddEntity = ({ name, onSave, hide, ...props }) => {
     }
   };
 
+  const styles = {
+    container: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    button: {
+      marginTop: "1rem",
+    },
+  };
+
   return (
-    <div>
+    <div style={styles.container}>
       <textarea
         rows="2"
         cols="25"
@@ -32,7 +42,11 @@ const AddEntity = ({ name, onSave, hide, ...props }) => {
         onChange={(e) => setEntity(e.target.value)}
         ref={textAreaRef}
       ></textarea>
-      <button className="btn btn-primary" onClick={handleSave}>
+      <button
+        className="btn btn-primary"
+        style={styles.button}
+        onClick={handleSave}
+      >
         Save
       </button>
     </div>

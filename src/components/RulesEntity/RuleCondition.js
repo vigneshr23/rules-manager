@@ -28,11 +28,18 @@ const RuleCondition = (props) => {
       </option>
     ));
 
+  const style = {
+    margin: "1rem 0",
+    cursor: "pointer",
+  };
+
   return (
     <Fragment>
-      <span onClick={handleClick}>Add Condition</span>
+      <div style={style} onClick={handleClick}>
+        Add Condition
+      </div>
       {active ? (
-        <div>
+        <div className="field">
           <label>Condition Type </label>
           <select value={condition || ""} onChange={handleConditionChange}>
             <option>--select--</option>
@@ -41,19 +48,17 @@ const RuleCondition = (props) => {
         </div>
       ) : null}
 
-      <div>
-        {condition !== null && (
-          <div>
-            {
-              <ConditionalUserInput
-                handleEntityChange={handleEntityChange}
-                condition={preConditions[condition]}
-                entities={entities}
-              />
-            }
-          </div>
-        )}
-      </div>
+      {condition !== null && (
+        <div>
+          {
+            <ConditionalUserInput
+              handleEntityChange={handleEntityChange}
+              condition={preConditions[condition]}
+              entities={entities}
+            />
+          }
+        </div>
+      )}
     </Fragment>
   );
 };
@@ -87,19 +92,6 @@ export const ConditionalUserInput = ({
               onSave={handleEntityChange}
               {...entities}
             />
-            {/* <ModalContainer
-              title="Add Entity/Codntion"
-              display={(handleHide) => (
-                <AddEntity
-                  hide={handleHide}
-                  name="entity1"
-                  onSave={handleEntityChange}
-                  {...entities}
-                />
-              )}
-            >
-              <span className="precondition__entity">Entity</span>
-            </ModalContainer> */}
             AND{" "}
             <ModalButton
               name="entity2"
@@ -140,7 +132,7 @@ const ModalButton = (props) => {
   };
   return (
     <ModalContainer
-      title={`Add Condtion for ${props.name}`}
+      title={`Add condition for ${props.name}`}
       display={(handleHide) => <AddEntity {...props} hide={handleHide} />}
     >
       <span className="precondition__entity">{renderButtonLabel()}</span>
